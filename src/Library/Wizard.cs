@@ -8,7 +8,5 @@ namespace RolGame
         public Wizard(int health, string name) : base(health, name)
         {
         }
-
-
     }
 }

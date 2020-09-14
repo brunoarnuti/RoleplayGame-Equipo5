@@ -21,6 +21,22 @@ namespace RolGame
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
+        public bool IsDead
+        {
+            get
+            {
+                return this.isDead;
+            }
+        }
+
 
         public Character(int health, string name)
         {
@@ -94,7 +110,10 @@ namespace RolGame
             {
                 if((enemy.GetCharacterDefense() + enemy.Health) - this.GetCharacterAttack() > 0)
                 {
-                    enemy.health = (enemy.Health + enemy.GetCharacterDefense()) - this.GetCharacterAttack();
+                    if(enemy.GetCharacterDefense() < this.GetCharacterAttack())
+                    {
+                        enemy.health = (enemy.Health + enemy.GetCharacterDefense()) - this.GetCharacterAttack();
+                    }
                 }
                 else
                 {

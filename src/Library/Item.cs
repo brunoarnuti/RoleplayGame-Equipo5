@@ -4,9 +4,17 @@ namespace RolGame
 {
     public class Item
     {
-        private int itemAttack;
-        private int itemDefense;
+        protected int itemAttack;
+        protected int itemDefense;
         private string name;
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
 
         public Item(string name, int attack, int defense)
         {
