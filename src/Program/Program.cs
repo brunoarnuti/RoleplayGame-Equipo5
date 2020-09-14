@@ -23,7 +23,7 @@ namespace RolGame
             bookOfEldacar.AddComponent(darkKnowledge);
             bladeOfGondolin.AddComponent(gondorianFire);
 
-            //Creo los personajes
+            //Personajes
             Elf Toel_the_elf = new Elf(100, "Toel");
             Wizard Gondor_the_warlock = new Wizard(100, "Gondor");
 
@@ -34,12 +34,15 @@ namespace RolGame
             Gondor_the_warlock.AddItem(bookOfEldacar);
             Gondor_the_warlock.AddItem(aGreyCloak);
 
-            //Hago que se ataquen
+            //Los personajes se atacan
             /*
-            No pareceria correcto representar los movimientos que se quieran hacer en el juego con una clase.
-            Ya que estos escenarios de batalla se generaran a partir de lo que el usuario desee, y de lo que el usuario quiera dramatizar
-            Por eso si parece correcto representar las funciones como (attack), pero no los distintos (Console.WriteLine) que se quieran usar
+            No pareceria correcto representar las acciones que se quieran hacer en el juego con una clase (el contenido especifico de los Console.WriteLine).
+            Ya que estos escenarios de batalla se generaran a partir de lo que el usuario desee, y de lo que el usuario quiera dramatizar o decir
+            Por eso, si es correcto representar las funciones que modelan los comportamientos como (attack), pero no los distintos (Console.WriteLine) que se quieran usar o su contenido
             */
+
+
+            //Ejemplo de juego
             Gondor_the_warlock.Attack(Toel_the_elf);
             Console.WriteLine($"El personaje {Gondor_the_warlock.Name} ha atacado a {Toel_the_elf.Name} con su {bookOfEldacar.Name} y le ha infinjido {Gondor_the_warlock.GetCharacterAttack()-Toel_the_elf.GetCharacterDefense()}");
             Console.WriteLine($"Como resultado {Toel_the_elf.Name} quedo con {Toel_the_elf.Health.ToString()}");
@@ -49,12 +52,11 @@ namespace RolGame
             Console.WriteLine($"{Toel_the_elf.Name} devolvio el ataque a {Gondor_the_warlock.Name} y lo dejo con {Gondor_the_warlock.Health}");
             Gondor_the_warlock.RemoveItem(bookOfEldacar);
             Console.WriteLine($"{Gondor_the_warlock.Name} perdio su libro {bookOfEldacar.Name} y paso de tener {Gondor_the_warlock.GetCharacterAttack()+bookOfEldacar.GetItemAttack()} de ataque a tener {Gondor_the_warlock.GetCharacterAttack()}");
-            Toel_the_elf.Attack(Gondor_the_warlock);
-            Console.WriteLine($"{Toel_the_elf.Name} volvio a atacar a {Gondor_the_warlock.Name} y lo dejo con {Gondor_the_warlock.Health}");
-            Toel_the_elf.Attack(Gondor_the_warlock);
-            Console.WriteLine($"{Toel_the_elf.Name} volvio a atacar a {Gondor_the_warlock.Name} y lo dejo con {Gondor_the_warlock.Health}");
-            Toel_the_elf.Attack(Gondor_the_warlock);
-            Console.WriteLine($"{Toel_the_elf.Name} volvio a atacar a {Gondor_the_warlock.Name} y lo dejo con {Gondor_the_warlock.Health}");
+            while(!Gondor_the_warlock.IsDead)
+            {
+                Toel_the_elf.Attack(Gondor_the_warlock);
+                Console.WriteLine($"{Toel_the_elf.Name} vuelve a atacar ahora indefenso {Gondor_the_warlock.Name} y lo deja con {Gondor_the_warlock.Health} puntos de vida");
+            }
             Console.WriteLine($"{Gondor_the_warlock.Name} ha muerto");
         }
     }
