@@ -5,14 +5,22 @@ namespace RolGame
 {
     public class ComposedItem : Item
     {
-        private List<Item> pieces;
+        private List<Item> components;
         private int baseAttack;
         private int baseDefense;
+
+        public List<Item> Components
+        {
+            get
+            {
+                return this.components;
+            }
+        }
  
 
         public ComposedItem(string name, int attack, int defense) : base(name, attack, defense)
         {
-            this.pieces = new List<Item>();
+            this.components = new List<Item>();
             this.baseAttack = attack;
             this.baseDefense = defense;
         }
@@ -20,9 +28,9 @@ namespace RolGame
         public override int GetItemAttack()
         {
             int result = baseAttack;
-            foreach (Item piece in pieces)
+            foreach (Item component in components)
             {
-                result = result + piece.GetItemAttack();
+                result = result + component.GetItemAttack();
             }
             return result;
         }
@@ -30,23 +38,23 @@ namespace RolGame
         public override int GetItemDefense()
         {
             int result = baseDefense;
-            foreach (Item piece in pieces)
+            foreach (Item component in components)
             {
-                result = result + piece.GetItemDefense();
+                result = result + component.GetItemDefense();
             }
             return result;
         }
 
-        public void AddPiece(Item piece)
+        public void AddComponent(Item component)
         {
-            this.pieces.Add(piece);
+            this.components.Add(component);
             this.UpdateComposedItemStats();
         }
-        public void RemovePiece(Item piece)
+        public void RemoveComponent(Item component)
         {
-            if(this.pieces.Contains(piece))
+            if(this.components.Contains(component))
             {
-                this.pieces.Remove(piece);
+                this.components.Remove(component);
                 this.UpdateComposedItemStats();
             }
         }

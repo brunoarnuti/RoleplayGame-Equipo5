@@ -20,8 +20,8 @@ namespace RolGame
             Spell gondorianFire = new Spell("Gondorian Fire", 5, 0);
 
             //Agrego los hechizos a los objetos
-            bookOfEldacar.AddPiece(darkKnowledge);
-            bladeOfGondolin.AddPiece(gondorianFire);
+            bookOfEldacar.AddComponent(darkKnowledge);
+            bladeOfGondolin.AddComponent(gondorianFire);
 
             //Creo los personajes
             Elf Toel_the_elf = new Elf(100, "Toel");

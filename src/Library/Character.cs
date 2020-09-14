@@ -37,6 +37,14 @@ namespace RolGame
             }
         }
 
+        public List<Item> ItemsList
+        {
+            get
+            {
+                return this.items;
+            }
+        }
+
 
         public Character(int health, string name)
         {
