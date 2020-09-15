@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace Program
+namespace RolGame
 {
     class Program
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }
