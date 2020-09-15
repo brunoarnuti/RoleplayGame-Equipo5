@@ -61,7 +61,7 @@ namespace RolGame
         }
 
 
-        public Character(int health, string name)
+        public Character(int health, string name, string type)
         {   
             //Compruebo que los parametros dados son validos
             if(health > 0)
@@ -81,6 +81,10 @@ namespace RolGame
             else
             {
                 throw new Exception("Invalid name");
+            }
+            if(!string.IsNullOrEmpty(type))
+            {
+                this.characterType = type;
             }
 
             this.items = new List<Item>();
@@ -112,7 +116,14 @@ namespace RolGame
         public void AddItem(Item item)
         {
             //Agrego un item dado y actualizo los stats del personaje
-            this.items.Add(item);
+            switch (this.characterType)
+            {
+                case "mago":
+                    this.items.Add(item);
+                    break;
+                default:
+                    break;
+            }
             this.UpdateCharacterStats();
         }
         public void RemoveItem(Item item)
