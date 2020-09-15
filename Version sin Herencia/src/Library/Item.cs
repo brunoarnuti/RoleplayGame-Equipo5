@@ -5,13 +5,10 @@ namespace RolGame
     /*
     Esta clase representa a los items del juego. Fue creada para agrupar todo el estado y el comportamiento comun a todos los objetos Item.
     Es la clase padre de todos los diferentes tipos de items del juego.
-    Gracias a esta clase se pueden ejecutar operaciones polimorficas en las claes hijas. Como ocurre en los metodos (GetItemAttack) y (GetItemDefense)
-
-    Tiene solo una razon de cambio, por lo que cumple con el SRP. 
-    Si se quiere modificar o crear un tipo de Item diferente, lo unico que se tiene que hacer es heredar de esta clase, por lo que no es necesario modificarla directamente.
     */
     public class Item
     {
+        private string characterType;
         protected int itemAttack;
         protected int itemDefense;
         private string name;
