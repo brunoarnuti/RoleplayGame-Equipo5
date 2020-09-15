@@ -13,20 +13,9 @@ namespace RolGame
         Tambien hay que agregar que la clase es experta en todas las tareas que realiza, porque ella es la que tiene toda la informacion necesaria para llevarlas a cabo.
 
         Colabora unicamente con la clase Item, ya que posee una lista de objetos Item.
-
-        En cuanto a principios tambien se utilisa el Liskov Substitution Principle (LSP)
-        Este se hace notable en el metodo Attack. Ya que no nos interesa que tipo de personaje es en especifico, sino que lo que nos interesa es que tenga el tipo Character
-        Como no sabemos si el juego en el futuro querra agregar nuevos tipos de personajes (nuevas razas o clases), 
-        lo mas logico fue hacer que esta sea una clase padre para todas las clases que repesenten a los personajes.
-        Por lo que, para agregar a un tipo diferente de personaje, solo basta con crear una clase nueva y hacer que herede de esta.
-        De esta manera tambien ayudamos al principio SRP, ya que esta clase no deberia cambiar si alguno de los personajes quiere ejecutar los metodos de una manera diferente
-        simplemente tendra que sobre-escribirlos.
-
-        En este caso no hay funciones polimorficas, simplemente porque no fue necesario.
-        Pero si se quisiera tambien se podria hacer muy facilmente y seria muy util en caso de que diverja el comportamiento de alguna clase hija, al momento de atacar por ejemplo.
         */
 
-        //Salud inicial (se usa de forma auxiliar para la funcion Heal)
+        private string characterType;
         private int initialHealth;
         //Salud
         private int health;
@@ -97,8 +86,7 @@ namespace RolGame
             this.items = new List<Item>();
             this.isDead = false;
         }
-
-
+        
         public int GetCharacterAttack()
         {  
              //Recorro la lista de items para conseguir el ataque total 
