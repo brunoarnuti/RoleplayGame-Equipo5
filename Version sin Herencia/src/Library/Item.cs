@@ -8,7 +8,7 @@ namespace RolGame
     */
     public class Item
     {
-        private string characterType;
+        
         protected int itemAttack;
         protected int itemDefense;
         private string name;

@@ -16,6 +16,7 @@ namespace RolGame
         */
 
         //Salud inicial (se usa de forma auxiliar para la funcion Heal)
+        private string characterType;
         private int initialHealth;
         //Salud
         private int health;
