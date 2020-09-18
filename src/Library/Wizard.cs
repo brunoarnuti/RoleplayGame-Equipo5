@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RolGame
 {
-    public class Character
+    public class Wizard
     {
         /*
         Esta clase fue creada para agrupar toda la funcionalidad comun que poseen los distintos tipos de personajes del juego, promoviendo la reusabilidad y
@@ -15,7 +15,6 @@ namespace RolGame
         Colabora unicamente con la clase Item, ya que posee una lista de objetos Item.
         */
 
-        private string characterType;
         private int initialHealth;
         //Salud
         private int health;
@@ -27,6 +26,8 @@ namespace RolGame
         //Lista de items del personaje
         private List<Item> items;
         private bool isDead;
+        private List<Item> spellBook;
+
 
         public int Health 
         {
@@ -61,7 +62,7 @@ namespace RolGame
         }
 
 
-        public Character(int health, string name, string type)
+        public Wizard(int health, string name)
         {   
             //Compruebo que los parametros dados son validos
             if(health > 0)
@@ -82,22 +83,23 @@ namespace RolGame
             {
                 throw new Exception("Invalid name");
             }
-            if(!string.IsNullOrEmpty(type))
-            {
-                this.characterType = type;
-            }
 
+            this.spellBook = new List<Item>();
             this.items = new List<Item>();
             this.isDead = false;
         }
         
         public int GetCharacterAttack()
         {  
-             //Recorro la lista de items para conseguir el ataque total 
+            //Recorro la lista de items para conseguir el ataque total 
             int result = 0;
             foreach (Item item in this.items)
             {
                 result = result + item.GetItemAttack();
+            }
+            foreach (Item spell in this.spellBook)
+            {
+                result = result + spell.GetItemAttack();
             }
             return result;
         }
@@ -116,14 +118,7 @@ namespace RolGame
         public void AddItem(Item item)
         {
             //Agrego un item dado y actualizo los stats del personaje
-            switch (this.characterType)
-            {
-                case "mago":
-                    this.items.Add(item);
-                    break;
-                default:
-                    break;
-            }
+            this.items.Add(item);
             this.UpdateCharacterStats();
         }
         public void RemoveItem(Item item)
@@ -136,31 +131,43 @@ namespace RolGame
             }
         }
 
+        public void AddSpell(Item spell)
+        {
+            this.spellBook.Add(spell);
+        }
+        public void RemoveSpell(Item spell)
+        {
+            if(this.spellBook.Contains(spell))
+            {
+                this.spellBook.Remove(spell);
+            }
+        }
+
         public void Heal()
         {
             this.health = initialHealth;
             this.isDead = false;
         }
 
-        public void Attack(Character enemy)
+        public void RecieveAttack(int dmg)
         {
             //Si el enemigo no esta muerto lo ataca
-            if(enemy.isDead != true)
+            if(this.isDead != true)
             {
                 //Si el ataque no matara al enemigo, se realiza el calculo de cuanta vida le queda   
-                if((enemy.GetCharacterDefense() + enemy.Health) - this.GetCharacterAttack() > 0)
+                if((this.GetCharacterDefense() + this.Health) - dmg > 0)
                 {
                     //Si la defensa del enemigo es menor que el ataque, le quita la cantidad correspondiente. Caso contrario, lo "esquiva".
-                    if(enemy.GetCharacterDefense() < this.GetCharacterAttack())
+                    if(this.GetCharacterDefense() < dmg)
                     {
-                        enemy.health = (enemy.Health + enemy.GetCharacterDefense()) - this.GetCharacterAttack();
+                        this.health = (this.Health + this.GetCharacterDefense()) - dmg;
                     }
                 }
                 //El ataque efectivamente mata al enemigo
                 else
                 {
-                    enemy.health = 0;
-                    enemy.isDead = true;
+                    this.health = 0;
+                    this.isDead = true;
                 }
             }     
         }
